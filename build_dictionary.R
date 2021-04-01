@@ -115,6 +115,12 @@ print(head(names(gene_indexed_probes_list[[1]])))
 print(gene_indexed_probes_list[[1]][[1]])
 
 
+# promoter probes could be obtain like that
+bar = gene_indexed_probes_list
+names(bar) = NULL
+foo = unlist(lapply(bar, function(lchr) {sapply(lchr, "[[", "PROMOTER")}), recursive=FALSE)
+print(head(foo))
+length(foo)
 
 
 
