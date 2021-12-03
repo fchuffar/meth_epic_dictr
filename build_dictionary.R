@@ -10,6 +10,7 @@
 
 library(IlluminaHumanMethylationEPICmanifest)
 library(IlluminaHumanMethylationEPICanno.ilm10b4.hg19)
+# library(IlluminaHumanMethylation450kanno.ilmn12.hg19)
 pf = data.frame(getAnnotation(IlluminaHumanMethylationEPICanno.ilm10b4.hg19))
 pf$cg_id = rownames(pf)
 
