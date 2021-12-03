@@ -15,7 +15,7 @@ pf$cg_id = rownames(pf)
 
 # library(IlluminaHumanMethylation450kanno.ilmn12.hg19)
 # pf450k = data.frame(getAnnotation(IlluminaHumanMethylation450kanno.ilmn12.hg19))
-
+# sum(rownames(pf450k) %in% rownames(pf)) / nrow(pf450k)
 
 ################################################################################
 ###                Indexing probes using platform infos                      ###
