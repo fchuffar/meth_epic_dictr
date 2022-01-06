@@ -146,9 +146,10 @@ max_pos = sapply(chrs, function(chr) {
 })
 foo = as.numeric(cumsum(as.numeric(max_pos)))
 names(foo) = chrs
+foo = foo - foo[1]
 plot(pf[probes2,]$pos)
 plot(pf[probes2,]$pos + foo[pf[probes2,]$chr])
-$ plot(pf[probes2,]$pos + foo[pf[probes2,]$chr], pf$pv_raw, main="Manhatan plot")
+plot(pf[probes2,]$pos + foo[pf[probes2,]$chr], pf$pv_raw, main="Manhatan plot", pch=".")
 
 
 # Session Information
