@@ -107,20 +107,20 @@ if (!exists("gene_indexed_probes_list")) {
 ################################################################################
 
 
-# Probes are indexed by chromosome names...
-print(head(names(gene_indexed_probes_list)))
-# then by gene names... 
-print(head(names(gene_indexed_probes_list[[1]])))
-# and finally by relative postion according to gene.
-print(gene_indexed_probes_list[[1]][[1]])
-
+if (exists("PRINT_METHEPICMAP_LOG")) {
+  # Probes are indexed by chromosome names...
+  print(head(names(gene_indexed_probes_list)))
+  # then by gene names... 
+  print(head(names(gene_indexed_probes_list[[1]])))
+  # and finally by relative postion according to gene.
+  print(gene_indexed_probes_list[[1]][[1]])
+}
 
 # promoter probes could be obtain like that
 bar = gene_indexed_probes_list
 names(bar) = NULL
-foo = unlist(lapply(bar, function(lchr) {sapply(lchr, "[[", "PROMOTER")}), recursive=FALSE)
-print(head(foo))
-length(foo)
+prom_indexed_probes = unlist(lapply(bar, function(lchr) {sapply(lchr, "[[", "PROMOTER")}), recursive=FALSE)
+prom_indexed_probes = prom_indexed_probes[sapply(prom_indexed_probes, length) > 0]
 
 
 
