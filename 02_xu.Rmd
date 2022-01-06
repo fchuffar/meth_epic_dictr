@@ -139,12 +139,16 @@ rlm_out = ...(probes)
 rlm_out$pv_raw
 rlm_out$cpg
 
-plot(pf[rlm_out$cpg,]$pos, -log10(pv), main="Manhatan plot")
-
-plot(pf[probes2,]$pos, main="Manhatan plot")
-
-
-
+chrs = unique(pf[probes2,]$chr)
+max_pos = sapply(chrs, function(chr) {
+  meth_platform = chrs_indexed_methpf[[chr]]
+  max(meth_platform[intersect(rownames(meth_platform),probes2),]$pos)
+})
+foo = as.numeric(cumsum(as.numeric(max_pos)))
+names(foo) = chrs
+plot(pf[probes2,]$pos)
+plot(pf[probes2,]$pos + foo[pf[probes2,]$chr])
+$ plot(pf[probes2,]$pos + foo[pf[probes2,]$chr], pf$pv_raw, main="Manhatan plot")
 
 
 # Session Information
