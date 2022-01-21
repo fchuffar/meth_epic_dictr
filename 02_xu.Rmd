@@ -36,7 +36,7 @@ PMID: 30989176
 
 
 ```{r}
-xu = openxlsx::read.xlsx("doc/Xu_2020_JNCI_CpG_list.xlsx",colNames=TRUE, rowNames=TRUE)
+xu = openxlsx::read.xlsx("~/projects/cancair/doc/Xu_2020_JNCI_CpG_list.xlsx",colNames=TRUE, rowNames=TRUE)
 head(xu)
 dim(xu)
 
@@ -128,6 +128,10 @@ probes2 =  unique(unlist(roi_indexed_probes))
 # foo[names(foo)[foo>0& foo<2000]]
 # bar = names(foo[names(foo)[foo>0& foo<2000]])
 # xu[bar,]
+
+
+saveRDS(probes2, "extended_probes_xu.rds")
+
 ```
 
 `probes2` is the new set of probes
@@ -150,6 +154,7 @@ foo = foo - foo[1]
 plot(pf[probes2,]$pos)
 plot(pf[probes2,]$pos + foo[pf[probes2,]$chr])
 plot(pf[probes2,]$pos + foo[pf[probes2,]$chr], pf$pv_raw, main="Manhatan plot", pch=".")
+
 
 
 # Session Information
