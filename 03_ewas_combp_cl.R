@@ -10,6 +10,7 @@ library(dplyr)
 if(!exists("tabC_VF")){
   load(file="CL/tabC_VF.RData")
   names(tabC_VF)
+  head(tabC_VF[,1:30])
   dim(tabC_VF) 
 }
 
@@ -47,15 +48,16 @@ dim(sub_tabC_VF)
 
 #creation dun vecteur expo
 expos=c(
-  "no2_j0_6",
-  "no2_j0_59",
-  "conc_no2_GA",
-  "moy_PM10_7j",
-  "moy_PM10_60j",
-  "moy_PM10_365j",
+  # "no2_j0_6",
+  # "no2_j0_59",
+  # "conc_no2_GA",
+  # "moy_PM10_7j",
+  # "moy_PM10_60j",
+  # "moy_PM10_365j",
   "moy_PM25_7j",
-  "moy_PM25_60j",
-  "moy_PM25_365j"
+  # "moy_PM25_60j",
+  # "moy_PM25_365j",
+  NULL
 )
 expos
 
@@ -76,6 +78,13 @@ for (expo in expos) {
   rownames(ewas) = probes
   head(ewas)  
   dim(ewas)
+
+
+
+  library(IlluminaHumanMethylationEPICmanifest)
+  library(IlluminaHumanMethylationEPICanno.ilm10b4.hg19)
+  pf = pfepic = data.frame(getAnnotation(IlluminaHumanMethylationEPICanno.ilm10b4.hg19))
+
   
   # export ewas results
   pval = ewas[,2]  
