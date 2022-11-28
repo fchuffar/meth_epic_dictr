@@ -1,0 +1,32 @@
+{
+    "@context": "https://doi.org/10.5063/schema/codemeta-2.0",
+    "@type": "SoftwareSourceCode",
+    "license": "https://spdx.org/licenses/GPL-3.0",
+    "codeRepository": "https://github.com/fchuffar/methepic_map",
+    "dateCreated": "2022-01-11",
+    "name": "methepic_map",
+    "description": "An R script that build a dictionary of probes according to array annotations",
+    "applicationCategory": "Biology",
+    "programmingLanguage": [
+        "R"
+    ],
+    "author": [
+        {
+            "@type": "Person",
+            "givenName": "Florent",
+            "familyName": "Chuffart",
+            "email": "florent.chuffart@gmail.com",
+            "affiliation": {
+                "@type": "Organization",
+                "name": "INSERM"
+            }
+        }
+    ],
+    "contributor": [
+        {
+            "@type": "Person",
+            "givenName": "Chabert",
+            "familyName": "Clovis"
+        }
+    ]
+}
