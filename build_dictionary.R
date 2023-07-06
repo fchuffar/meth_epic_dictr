@@ -128,65 +128,39 @@ prom_indexed_probes = prom_indexed_probes[sapply(prom_indexed_probes, length) > 
 
 
 
-# export pf as bed
+# export platorms and CGI as bed files
 
-# write ewas res for combp
-bed = pf450k[,1:6]
-bed_filename = "pf450k_hg19.bed"
-bed[,1] = as.character(bed[,1])
-bed[,6] = as.character(bed[,3])
-bed[,3] = bed[,2]+1
-bed[,5] = 1
-bed = bed[order(bed[,1], bed[,2]),]
-head(bed)
-write.table(bed,file=bed_filename , sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
+pfs = list(
+  pf450k = pf450k,
+  pfepic = pfepic
+)
+for (pfname in names(pfs)) {
+  pf = pfs[[pfname]]
+  bed = pf[,1:6]
+  bed_filename = paste0(pfname, "_probes_hg19.bed")
+  bed[,1] = as.character(bed[,1])
+  bed[,6] = as.character(bed[,3])
+  bed[,3] = bed[,2]+1
+  bed[,5] = 1
+  bed = bed[order(bed[,1], bed[,2]),]
+  head(bed)
+  write.table(bed,file=bed_filename , sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
 
-bed = pfepic[,1:6]
-bed_filename = "pfepic_hg19.bed"
-bed[,1] = as.character(bed[,1])
-bed[,6] = as.character(bed[,3])
-bed[,3] = bed[,2]+1
-bed[,5] = 1
-bed = bed[order(bed[,1], bed[,2]),]
-head(bed)
-write.table(bed,file=bed_filename , sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
-
-
-bed_filename = "cgiepic_hg19.bed"
-cgi = unique(pfepic$Islands_Name, na.rm=TRUE)
-cgi = setdiff(cgi, "")
-bed = do.call(rbind, strsplit(cgi, ":|-"))
-rownames(bed) = cgi
-bed[,1] = as.character(bed[,1])
-bed[,2] = as.numeric(bed[,2])
-bed[,3] = as.numeric(bed[,3])
-bed = data.frame(bed)
-bed$name = rownames(bed)
-bed$score = 1
-bed$strand = "+"
-bed = bed[order(bed[,1], bed[,2]),]
-head(bed)
-dim(bed)
-write.table(bed,file=bed_filename , sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
-
-
-
-
-bed_filename = "cgi450k_hg19.bed"
-cgi = unique(pf450k$Islands_Name, na.rm=TRUE)
-cgi = setdiff(cgi, "")
-bed = do.call(rbind, strsplit(cgi, ":|-"))
-rownames(bed) = cgi
-bed[,1] = as.character(bed[,1])
-bed[,2] = as.numeric(bed[,2])
-bed[,3] = as.numeric(bed[,3])
-bed = data.frame(bed)
-bed$name = rownames(bed)
-bed$score = 1
-bed$strand = "+"
-bed = bed[order(bed[,1], bed[,2]),]
-head(bed)
-dim(bed)
-write.table(bed,file=bed_filename , sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)
-
+  bed_filename = paste0(pfname, "_cgi_hg19.bed")
+  cgi = unique(pf$Islands_Name, na.rm=TRUE)
+  cgi = setdiff(cgi, "")
+  bed = do.call(rbind, strsplit(cgi, ":|-"))
+  rownames(bed) = cgi
+  bed[,1] = as.character(bed[,1])
+  bed[,2] = as.numeric(bed[,2])
+  bed[,3] = as.numeric(bed[,3])
+  bed = data.frame(bed)
+  bed$name = rownames(bed)
+  bed$score = 1
+  bed$strand = "+"
+  bed = bed[order(bed[,1], bed[,2]),]
+  head(bed)
+  dim(bed)
+  write.table(bed,file=bed_filename , sep="\t", quote=FALSE, row.names=FALSE, col.names=FALSE)  
+}
 
